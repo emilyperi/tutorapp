@@ -3,7 +3,7 @@ import axios from 'axios'
 const getAll = () => {
   const request = axios({
     method: 'get',
-    url: '/test',
+    url: 'http://localhost:5000/api/tutors',
   })
   return request.then(response => response.data) 
 }

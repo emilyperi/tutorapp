@@ -13,8 +13,8 @@ function App() {
         tutorService
             .getAll()
             .then(response => {
-                console.log("got tutors")
-                setTutors(response.data)})
+                console.log(response)
+                setTutors(response)})
             .catch(error => console.log("error calling tutorService", error))
     }, [])
 
