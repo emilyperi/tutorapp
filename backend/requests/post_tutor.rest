@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/tutors
+Content-Type: application/json
+
+{
+        "name": "Bertrand Russell",
+        "subjects": ["Formal Logic"],
+        "available": true
+}
