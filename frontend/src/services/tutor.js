@@ -1,21 +1,22 @@
 import axios from 'axios'
 
-const getAll = () => {
+const getAll = async () => {
   const request = axios({
     method: 'get',
     url: 'http://localhost:5000/api/tutors',
   })
-  return request.then(response => response.data) 
+  const response = await request
+  return response.data 
 }
 
-const getFiltered = (params) => {
-  console.log(params)
+const getFiltered = async (params) => {
   const request = axios({
     method: 'get',
     url: 'http://localhost:5000/api/tutors',
     params: params
   })
 
-  return request.then(response => response.data)
+  const response = await request
+  return response.data
 }
-export default { getAll, getFiltered}
+export default { getAll, getFiltered }

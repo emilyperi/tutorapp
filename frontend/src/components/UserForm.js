@@ -80,8 +80,10 @@ function UserForm(props) {
             </fieldset>
             <fieldset>
                 <legend>Price range</legend>
+                <div className="flex">
                 <label htmlFor="price">Max price per hour ${price}: </label>
                 <input type="range" id="price" name="price" min="0" max="80" value={price} onChange={handlePriceChange}/>
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Scheduling</legend>

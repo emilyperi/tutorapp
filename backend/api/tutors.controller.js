@@ -4,7 +4,6 @@ const Subjects = require('../models/subjects.js')
 class TutorsController {
     static async apiGetTutors(req, res, next) {
         try {
-        console.log(req.query)
         let filters = {}
         if (req.query.price) {
             filters.price = req.query.price
@@ -14,7 +13,6 @@ class TutorsController {
         }
         if (req.query.schedule) {
             filters.schedule = {}
-            console.log(req.query.schedule)
             req.query.schedule.forEach(day => {
                 filters.schedule[day] = true;
             })

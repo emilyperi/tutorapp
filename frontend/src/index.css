@@ -23,3 +23,19 @@ body {
     margin-top:auto;
     margin-bottom:auto;
 }
+
+label[for=price] {
+    height: 16pt;
+}
+
+input[type=range] {
+    margin-top: auto;
+    height: 16pt;
+    margin-left: 1em;
+    width:40%;
+}
+
+.flex {
+    height: 18pt;
+    display: flex;
+}
