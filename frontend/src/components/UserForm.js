@@ -1,32 +1,33 @@
 import React from "react"
 import {useState} from "react"
 import tutorService from "../services/tutor"
+import CheckBox from "./CheckBox"
 
 function UserForm(props) {
     const [price, setPrice] = useState(80)
     const [subject, setSubject] = useState("all")
     const [schedule, setSchedule] = useState({
-        "monday": false, 
-        "tuesday": false, 
-        "wednesday": false, 
-        "thursday": false,
-        "friday": false,
-        "saturday": false,
-        "sunday": false
-    })
+                                    "monday": true, 
+                                    "tuesday": true, 
+                                    "wednesday": true, 
+                                    "thursday": true,
+                                    "friday": true,
+                                    "saturday": true,
+                                    "sunday": true
+                                })
     const subjects = props.subjects
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        let schedList = Object.keys(schedule).filter(key => schedule[key])
+        schedList = schedList.length === 0 ? ["None"] : schedList
+        
         let params = {
             price: price,
-            schedule: Object.keys(schedule).filter(key => schedule[key])
+            subject: subject,
+            schedule: schedList
         }
 
-        if (subject !== "all") {
-            params.subject = subject
-        }
-        console.log(params)
         tutorService
             .getFiltered(params)
             .then(response => {
@@ -39,6 +40,7 @@ function UserForm(props) {
 
     const handleReset = (event) => {
         setPrice(80)
+        props.setSubmitted(false)
     }
 
     const handlePriceChange = (event) => {
@@ -55,6 +57,15 @@ function UserForm(props) {
         newSched[day] = !schedule[day]
         setSchedule(newSched)
     }
+
+    // const handleSelectAll = (event) => {
+    //     let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+    //     checkboxes.forEach(box => {
+    //         if (box !== event.target) {
+    //             return box.checked = event.target.checked
+    //         }
+    //     })
+    // }
 
     return (
         <form onSubmit={handleSubmit} onReset={handleReset}>
@@ -75,20 +86,13 @@ function UserForm(props) {
             <fieldset>
                 <legend>Scheduling</legend>
                 <div>
-                <input type="checkbox" id="monday" name="monday" value="monday" onChange={handleScheduleChange} />
-                <label htmlFor="monday">Monday</label><br/>
-                <input type="checkbox" id="tuesday" name="tuesday" value="tuesday" onChange={handleScheduleChange} />
-                <label htmlFor="tuesday">Tuesday</label><br/>
-                <input type="checkbox" id="wednesday" name="wednesday" value="wednesday" onChange={handleScheduleChange} />
-                <label htmlFor="wednesday">Wednesday</label><br/>
-                <input type="checkbox" id="thursday" name="thursday" value="thursday" onChange={handleScheduleChange} />
-                <label htmlFor="thursday">Thursday</label><br/>
-                <input type="checkbox" id="friday" name="friday" value="friday" onChange={handleScheduleChange} />
-                <label htmlFor="Friday">Friday</label><br/>
-                <input type="checkbox" id="saturday" name="saturday" value="saturday" onChange={handleScheduleChange} />
-                <label htmlFor="saturday">Saturday</label><br/>
-                <input type="checkbox" id="sunday" name="sunday" value="sunday" onChange={handleScheduleChange}  />
-                <label htmlFor="sunday">Sunday</label>
+                <CheckBox id="monday" onChange={handleScheduleChange} />
+                <CheckBox id="tuesday" onChange={handleScheduleChange} />
+                <CheckBox id="wednesday" onChange={handleScheduleChange} />
+                <CheckBox id="thursday" onChange={handleScheduleChange} />
+                <CheckBox id="friday" onChange={handleScheduleChange} />
+                <CheckBox id="saturday" onChange={handleScheduleChange} />
+                <CheckBox id="sunday" onChange={handleScheduleChange} /> 
                 </div>
             </fieldset>
             <button type="submit">Search</button>

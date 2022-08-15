@@ -9,6 +9,7 @@ const getAll = () => {
 }
 
 const getFiltered = (params) => {
+  console.log(params)
   const request = axios({
     method: 'get',
     url: 'http://localhost:5000/api/tutors',
