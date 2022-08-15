@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/tutors
+GET http://localhost:5000/api/tutors?subject=Anthropology&price=50&schedule=monday&schedule=tuesday&schedule=wedenesday
