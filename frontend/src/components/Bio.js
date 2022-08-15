@@ -2,20 +2,20 @@ import React from "react";
 
 function Bio ({tutor}) {
     const name = tutor ? tutor.name : ""
-    const subjects = tutor ? tutor.subjects : []
+    const subjects = tutor ? tutor.subjects.join(", ") : ""
     const price = tutor ? tutor.price : 0
-    const available = tutor ? tutor.available : false
+    const schedule = tutor ? Object.keys(tutor.schedule)
+                                .filter(key => tutor.schedule[key])
+                                .map(day => day.charAt(0).toUpperCase() + day.slice(1))
+                                .join(", ")
+                                : "No"
 
     return (
         <div>
             <h4>Name: {name}</h4>
-            <div>Subjects:
-                <ul>
-                {subjects.map(subject => <li key={subject}>{subject}</li>)}
-                </ul>
-            </div>
+            <div>Subjects: {subjects}</div>
             <div>Price: ${price}/hr</div>
-            <div>Available: {available ? "Yes" : "No"}</div>
+            <div>Available: {schedule}</div>
             <div><button>Contact</button></div>
         </div>
     )
